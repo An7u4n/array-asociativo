@@ -11,16 +11,18 @@
 (define agrega-reemplaza
   (lambda (array clave valor)
     (if (equal? array '())
-        (list clave valor)
+        (list (list clave valor))
     (if (equal? (car array) array-asoc-etiqueta)
         (list array-asoc-etiqueta (agrega-reemplaza (cdr array) clave valor))
         (if (equal? (obtener_clave (car array)) clave)
             (cons (cons clave valor) (cdr array))
-            (cons (car array)
+            (append (car array)
                   (agrega-reemplaza (cdr array) clave valor)))))))
 
 
-
+(agrega-reemplaza
+(agrega-reemplaza (array-asoc-crea) #\a 97)
+#t 'boolean)
 (agrega-reemplaza (array-asoc-crea) 8.6 '(racket rkt))
 ;array 1
 
@@ -44,3 +46,4 @@
 (agrega-reemplaza
 (agrega-reemplaza (array-asoc-crea) "impar" odd?)
 "ultimo" (lambda (lista) (car (reverse lista)))))
+array-2
